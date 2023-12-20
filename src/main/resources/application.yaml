@@ -1,0 +1,62 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'TRUE'
+    hibernate:
+      ddl-auto: update
+    open-in-view: 'false'
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+    password: ${MYSQL_PASSWORD}
+    username: ${MYSQL_USERNAME}
+    #    ${MYSQL_USERNAME}
+
+    url: jdbc:mysql://localhost:3306/my-recipe-book?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+#    url: jdbc:mysql://my-library.mysql.database.azure.com:3306/db?createDatabaseIfNotExist=true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor: TRACE
+        SQL: DEBUG
+      nodeValue: WARN
+    blog: WARN
+server:
+  port: 8080
+  error:
+    include-message: never
+
+#MyLibrary:
+#  remember.me.key: ${REMEMBER_ME_KEY:test}
+
+#management:
+#  endpoint:
+#    beans:
+#      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  info:
+    env:
+      enabled: true
+
+
+#info:
+#  app:
+#    name: My Library
+#    description: Online Library Management System
+#    version: 1.0.0
+
