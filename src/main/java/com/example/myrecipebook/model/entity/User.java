@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
     @Column(nullable = false,unique = true)
@@ -33,7 +33,7 @@ public class User {
     @Column(nullable = false,name = "last_name")
     private String lastName;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Recipe> recipes = new ArrayList<>();
 
     public User() {
