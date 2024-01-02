@@ -17,7 +17,7 @@ public class RegisterUserDTO {
     @UniqueUsername
     private String username;
 
-    @NotBlank(message = "")
+    @NotBlank(message = "Email must not be empty")
     @Email(message = "Email must be valid")
     @UniqueEmail
     private String email;

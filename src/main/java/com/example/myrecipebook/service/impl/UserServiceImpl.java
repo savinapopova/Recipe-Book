@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
                 registerUserDTO.getFirstName(),
                 registerUserDTO.getLastName());
         user.getRoles().add(userRole);
+        this.userRepository.save(user);
     }
 
 }
