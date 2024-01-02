@@ -26,8 +26,9 @@ public class Recipe {
     @Lob
     private String steps;
 
-   @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
-    private List<Image> images = new ArrayList<>();
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
    @ManyToOne
    private Category category;

@@ -1,54 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Recipe-Book</title>
-  <link rel="stylesheet" href="/css/bootstrap-reboot.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <!--    <link rel="stylesheet" href="/css/globals.css" />-->
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{fragments/head.html}"/>
 <body class="d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand-lg navbar-dark second-color py-3">
-  <div class="container-fluid">
-    <div>
-      <img src="/images/logo.png" alt="logo" width="60" height="60"/>
-      <span class="navbar-brand text-black font-italic">Recipe-Book</span>
-    </div>
-    <button class='navbar-toggler custom-dark-toggler' type='button'
-            data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown'
-            aria-controls={'navbarNavDropdown'} aria-expanded='false'
-            aria-label='Toggle navigation'
-    >
-      <span class='navbar-toggler-icon custom-dark-toggler-icon'></span>
-    </button>
-    <div class='collapse navbar-collapse' id='navbarNavDropdown'>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-black" href="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-black" href="/recipes">My Recipes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-black" href="/recipes/add">Add Recipe</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item m-1">
-          <a type="button" class="btn btn-outline-dark">Sign in</a>
-        </li>
-        <ul class="navbar-nav ms-auto">
-          <li class='nav-item m-1'>
-            <button type="submit" name="submit" class='btn btn-outline-dark' >Logout</button>
-          </li>
-        </ul>
-
-      </ul>
-
-    </div>
-  </div>
-</nav>
+<header th:include="~{fragments/nav-and-footer/nav}"/>
 <div class="container-fluid">
   <div class="row mt-5">
     <div class="col-12 col-md-6 col-lg-4">
@@ -83,9 +38,7 @@
     </div>
   </div>
 </div>
-<footer class='footer py-4 second-color mt-auto' style="padding-left: 20px;">
-  <p class='col-md-4 mb-0'>© Example App, Inc</p>
-</footer>
+<th:block th:include="~{fragments/nav-and-footer/footer}"/>
 <script src="/js/bootstrap.bundle.js"></script>
 </body>
 </html>
