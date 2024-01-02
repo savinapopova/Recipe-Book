@@ -1,5 +1,6 @@
 package com.example.myrecipebook.service.impl;
 
+import com.example.myrecipebook.model.dto.RegisterUserDTO;
 import com.example.myrecipebook.model.entity.Role;
 import com.example.myrecipebook.model.entity.User;
 import com.example.myrecipebook.repository.UserRepository;
@@ -42,4 +43,18 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    @Override
+    public void register(RegisterUserDTO registerUserDTO) {
+
+        Role userRole = this.roleService.getUserRole();
+
+        User user = new User(registerUserDTO.getUsername(),
+                registerUserDTO.getEmail(),
+                this.passwordEncoder.encode(registerUserDTO.getPassword()),
+                registerUserDTO.getFirstName(),
+                registerUserDTO.getLastName());
+        user.getRoles().add(userRole);
+    }
+
 }

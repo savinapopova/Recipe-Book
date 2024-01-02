@@ -37,4 +37,7 @@ public class RegisterUserDTO {
     @NotBlank(message = "")
     @Size(min = 2,max = 20,message = "Last name must be between 2 and 20 characters")
     private String lastName;
+
+    public RegisterUserDTO() {
+    }
 }
