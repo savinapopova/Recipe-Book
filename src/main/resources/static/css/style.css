@@ -11,21 +11,45 @@
     font-size: 32px;
 }
 
+.font-italic-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px;
+}
+
+.font-italic-input {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+}
+
 /* Стилове за тъмен тогълер */
 .custom-dark-toggler {
     color: #000; /* Цвят на иконата и текста */
     border-color: #000; /* Цвят на границата (ако има такава) */
 }
 
-.card-img-top {
+.card-img-top-home {
     object-fit: cover; /* Запазва съотношението на страните и прави изображението изпълващо цялата област на картата */
     height: 300px; /* Можете да промените този размер според вашите нужди */
+}
+
+.card-img-top-add {
+    object-fit: cover; /* Запазва съотношението на страните и прави изображението изпълващо цялата област на картата */
+    height: 500px; /* Можете да промените този размер според вашите нужди */
 }
 
 
 
 .bg-image {
     background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.bg-image-add {
+    background-image: url('/images/old-paper-sheet.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

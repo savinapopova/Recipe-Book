@@ -1,5 +1,6 @@
 package com.example.myrecipebook.service.impl;
 
+import com.example.myrecipebook.exception.ObjectNotFoundException;
 import com.example.myrecipebook.model.entity.Category;
 import com.example.myrecipebook.model.enums.CategoryName;
 import com.example.myrecipebook.repository.CategoryRepository;
@@ -29,5 +30,12 @@ public class CategoryServiceImpl implements CategoryService {
             this.categoryRepository.saveAll(categories);
         }
 
+    }
+
+    @Override
+    public Category findByCategoryName(String category) {
+// TODO: handle exception
+        return this.categoryRepository.findByName(CategoryName.valueOf(category.toUpperCase()))
+                .orElseThrow(() -> new ObjectNotFoundException("Category with name " + category.toLowerCase() + " not found!"));
     }
 }

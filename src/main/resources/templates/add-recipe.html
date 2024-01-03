@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{fragments/head.html}"/>
+
+<body class="d-flex flex-column min-vh-100 bg-image-add">
+<header th:include="~{fragments/nav-and-footer/nav}"/>
+
+<div class='container mt-5 mb-5 d-flex flex-column align-items-center'>
+
+    <div class='card shadow bg-body rounded d-flex flex-column align-items-center col-md-10'>
+
+        <img class="card-img-top card-img-top-add" src="/images/my-family-recipes1.jpg">
+
+    <form th:action="@{/recipes/add}"
+          th:method="POST"
+          th:object="${addRecipeDTO}"
+          class="mt-4">
+
+        <h2 class="text-center font-italic-title">Add Recipe</h2>
+
+        <div th:if="${sentSuccess}" class='alert alert-success font-italic-input' role='alert'>
+            Book added successfully
+        </div>
+
+
+        <div th:if="${#fields.hasErrors()}" class='alert alert-danger font-italic-input' role='alert'>
+            All fields must be filled out
+        </div>
+
+
+
+            <div class='card-body'>
+
+                <div class='row'>
+                    <div class='col-md-6 mb-3'>
+                        <label class='form-label font-italic-input'>Title</label>
+                        <input th:field="*{title}"
+                               type="text" class='form-control font-italic-input' name='title'/>
+                    </div>
+                    <div class='col-md-12 mb-3'>
+                        <label class='form-label font-italic-input'>Ingredients</label>
+                        <textarea th:field="*{ingredients}"
+                                  class='form-control font-italic-input' id='ingredientsFormControlTextarea1' rows="3" name="ingredients"></textarea>
+                    </div>
+
+                    <div class='col-md-12 mb-3'>
+                        <label class='form-label font-italic-input'>Steps</label>
+                        <textarea th:field="*{steps}"
+                                  class='form-control font-italic-input' id='stepsFormControlTextarea1' rows="3" name="steps"></textarea>
+                    </div>
+                    <div class='col-md-3 mb-3'>
+                        <label class='form-label font-italic-input'>Category</label>
+                        <select th:field="*{category}"
+                                id='addNewBook' class='form-select' name="category">
+                            <option value="" selected></option>
+                            <option value="SOUP" class="font-italic-input">Soup</option>
+                            <option value="SALAD" class="font-italic-input">Salad</option>
+                            <option value="MEAT_DISH" class="font-italic-input">Meat Dish</option>
+                            <option value="FISH_DISH" class="font-italic-input">Fish Dish</option>
+                            <option value="VEGETARIAN" class="font-italic-input">Vegetarian</option>
+                            <option value="DESSERT" class="font-italic-input">Dessert</option>
+                            <option value="BAKING" class="font-italic-input">Baking</option>
+                            <option value="OTHER" class="font-italic-input">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class='col-md-3 mb-3'>
+                    <label class='form-label font-italic-input'>Image URL</label>
+                    <input th:field="*{imageUrl}"
+                           type="text" class='form-control font-italic-input' name='imageUrl'/>
+                </div>
+
+                <div class="d-flex justify-content-center">
+
+                <button type='submit' class='btn btn-lg btn-outline-dark mt-3 font-italic-input'>
+                    Submit
+                </button>
+            </div>
+
+            </div>
+
+    </form>
+</div>
+</div>
+
+<th:block th:include="~{fragments/nav-and-footer/footer}"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

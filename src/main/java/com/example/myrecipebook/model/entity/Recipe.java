@@ -17,13 +17,11 @@ public class Recipe {
     @Column(nullable = false)
     private String title;
 
-    @ElementCollection
-    @CollectionTable(name = "ingredients_quantity", joinColumns = @JoinColumn(name = "recipe_id"))
-    @MapKeyColumn(name = "ingredient")
-    @Column(name = "quantity")
-    private Map<String, String> ingredients = new LinkedHashMap<>();
 
-    @Lob
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String ingredients;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String steps;
 
 
@@ -39,13 +37,11 @@ public class Recipe {
 
     }
 
-    // Добавяне на съставка към рецептата
-    public void addIngredient(String ingredientName, String grammage) {
-        ingredients.put(ingredientName, grammage);
-    }
-
-    // Премахване на съставка от рецептата
-    public void removeIngredient(String ingredientName) {
-        ingredients.remove(ingredientName);
+    public Recipe(String title, String ingredients, String steps, String imageUrl, Category category) {
+        this.title = title;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.imageUrl = imageUrl;
+        this.category = category;
     }
 }
