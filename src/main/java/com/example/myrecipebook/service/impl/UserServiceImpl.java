@@ -1,5 +1,6 @@
 package com.example.myrecipebook.service.impl;
 
+import com.example.myrecipebook.exception.ObjectNotFoundException;
 import com.example.myrecipebook.model.dto.RegisterUserDTO;
 import com.example.myrecipebook.model.entity.Role;
 import com.example.myrecipebook.model.entity.User;
@@ -56,6 +57,13 @@ public class UserServiceImpl implements UserService {
                 registerUserDTO.getLastName());
         user.getRoles().add(userRole);
         this.userRepository.save(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        //TODO: Handle exception
+        return this.userRepository.findByUsername(username).orElseThrow(()
+        -> new ObjectNotFoundException("User with name " + username + " not found!"));
     }
 
 }

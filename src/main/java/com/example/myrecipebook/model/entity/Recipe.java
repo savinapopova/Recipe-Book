@@ -31,6 +31,9 @@ public class Recipe {
    @ManyToOne
    private Category category;
 
+    @ManyToOne
+   private User user;
+
 
 
     public Recipe() {

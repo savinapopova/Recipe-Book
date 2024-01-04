@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{fragments/head.html}"/>
+
+<body class="d-flex flex-column min-vh-100">
+<header th:include="~{fragments/nav-and-footer/nav}"/>
+<div>
+    <div class='container'>
+        <div>
+            <div class='row mt-5'>
+                <form th:action="@{/recipes/{category}(category=*{category})}"
+                      th:method="POST"
+                      class='col-6'>
+                    <div class='d-flex'>
+                        <input name="title"
+                               th:value="${title}"
+                               class='form-control me-2' type='search'
+                               placeholder='Search' aria-labelledby='Search'/>
+                        <button type="submit" class='btn btn-outline-success'
+                        >
+                            Search
+                        </button>
+                    </div>
+                </form>
+                <div class='col-4'>
+                    <div class='dropdown'>
+                        <button class='btn text-white dropdown-toggle main-color' type='button'
+                                id='dropdownMenuButton1' data-bs-toggle='dropdown'
+                                aria-expanded='false'>
+                            Choose Category
+                        </button>
+                        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/all}">
+                                    All
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/salad}">
+                                    Salad
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/soup}">
+                                    Soup
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/meat-dish}">
+                                    Meat Dish
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/fish-dish}">
+                                    Fish Dish
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/vegetarian}">
+                                    Vegetarian
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/dessert}">
+                                    Dessert
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/baking}">
+                                    Baking
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
+                                   th:href="@{/search/other}">
+                                    Other
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class='mt-3'>
+                <h5>Number of results: (<th:block th:text="${totalElements}"/>)</h5>
+                <p th:if="${totalElements > 0 && recipes.size() > 1}">
+                    <th:block th:text="${indexOfFirstRecipe + 1}"/> - <th:block th:text="${lastItem}"/> of <th:block th:text="${totalElements}"/> items:
+                </p>
+                <p th:if="${totalElements > 0 && recipes.size() <= 1}">
+                    <th:block th:text="${lastItem}"/> of <th:block th:text="${totalElements}"/> items:
+                </p>
+            </div>
+            <div th:each="recipe: ${recipes}" class='card mt-3 shadow p-3 mb-3 bg-body rounded'>
+                <div class='row g-0'>
+                    <div class='col-md-2'>
+                        <div class='mt-4 d-none d-lg-block'>
+
+                            <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'"
+
+                                 alt='Recipe'
+                                 class="card-img"
+                            />
+                        </div>
+                        <div class='d-lg-none d-flex justify-content-center
+                        align-items-center'>
+
+                            <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'"
+
+                                 alt='Recipe'
+                                    class="card-img"
+                            />
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div class='card-body'>
+
+                            <h4 th:text="${recipe.title}">
+                                {recipe.title}
+                            </h4>
+
+                        </div>
+                    </div>
+                    <div class='col-md-4 d-flex justify-content-center align-items-center'>
+                        <a class='btn btn-md btn-outline-dark' th:href="@{/recipes/{id}(id=*{recipe.getId()})}" >
+                            View Details
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div th:if="${recipes.size() == 0}" class='m-5'>
+                <h3>
+                    No recipes here yet
+                </h3>
+            </div>
+            <nav th:if="${recipes.size() > 0}" aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item" th:if="${currentPage > 1}">
+                        <form th:action="@{/search/{category}(category=${category}, page=${currentPage - 1}, title=${title})}"
+                              th:method="POST">
+                            <button type="submit" class="page-link text-main-color">Previous</button>
+                        </form>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                        <form th:action="@{/search/{category}(category=${category}, page=${pageNumber}, title=${title})}"
+                              th:method="POST">
+                            <button type="submit" class="page-link text-main-color" th:text="${pageNumber}"
+                                    th:classappend="${pageNumber == currentPage} ? 'active main-color text-white' : ''"></button>
+                        </form>
+                    </li>
+
+                    <li class="page-item" th:if="${currentPage < totalPages}">
+                        <form th:action="@{/search/{category}(category=${category}, page=${currentPage + 1}, title=${title})}"
+                              th:method="POST">
+
+                            <button type="submit" class="page-link text-main-color">Next</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<th:block th:include="~{fragments/nav-and-footer/footer}"/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

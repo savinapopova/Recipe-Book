@@ -33,7 +33,7 @@ public class User {
     @Column(nullable = false,name = "last_name")
     private String lastName;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     private List<Recipe> recipes = new ArrayList<>();
 
     public User() {
