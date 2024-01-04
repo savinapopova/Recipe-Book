@@ -99,37 +99,35 @@
                     <th:block th:text="${lastItem}"/> of <th:block th:text="${totalElements}"/> items:
                 </p>
             </div>
-            <div th:each="recipe: ${recipes}" class='card mt-3 shadow p-3 mb-3 bg-body rounded'>
+            <div th:each="recipe: ${recipes}" class='card mt-3 shadow mb-3 bg-body rounded'>
                 <div class='row g-0'>
                     <div class='col-md-2'>
-                        <div class='mt-4 d-none d-lg-block'>
+                        <div class='d-none d-lg-block'>
 
                             <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'"
-
+                                 class="img-fluid h-100"
                                  alt='Recipe'
-                                 class="card-img"
                             />
                         </div>
                         <div class='d-lg-none d-flex justify-content-center
                         align-items-center'>
 
                             <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'"
-
+                                 class="img-fluid h-100"
                                  alt='Recipe'
-                                    class="card-img"
                             />
                         </div>
                     </div>
-                    <div class='col-md-6'>
+                    <div class='col-md-8 d-flex justify-content-center align-items-center'>
                         <div class='card-body'>
 
-                            <h4 th:text="${recipe.title}">
+                            <h4 class="ms-2" th:text="${recipe.title}">
                                 {recipe.title}
                             </h4>
 
                         </div>
                     </div>
-                    <div class='col-md-4 d-flex justify-content-center align-items-center'>
+                    <div class='col-md-2 d-flex justify-content-center align-items-center'>
                         <a class='btn btn-md btn-outline-dark' th:href="@{/recipes/{id}(id=*{recipe.getId()})}" >
                             View Details
                         </a>
