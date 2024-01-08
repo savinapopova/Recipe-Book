@@ -18,10 +18,10 @@ public class Recipe {
     private String title;
 
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(length = Integer.MAX_VALUE, nullable = false)
     private String ingredients;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(length = Integer.MAX_VALUE, nullable = false)
     private String steps;
 
 

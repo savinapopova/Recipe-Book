@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{fragments/head.html}"/>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="~{fragments/nav-and-footer/nav}"/>
+<div>
+    <div class="container d-none d-lg-block">
+        <div class="card m-4 ps-4 shadow bg-body rounded-3">
+            <div class="row mt-5">
+                <div class=col-sm-2 col-md-2>
+                    <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'" width="226" height="349" alt="Book">
+            </div>
+            <div class="col-4 col-md-4 container">
+                <div class="ml-2">
+                    <h2 th:text="${recipe.title}"></h2>
+                    <p th:each="i: ${recipe.getIngredients()}" class="lead" th:text="${i}"></p>
+                    <p th:each="s: ${recipe.getSteps()}" class="lead" th:text="${s}"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class='m-3 d-flex justify-content-center align-items-center'>-->
+<!--        <a type='button' class='btn main-color btn-lg text-white'-->
+<!--           href="${window.location.origin}/checkout/book/${book.id}">-->
+<!--            CheckOut-->
+<!--        </a>-->
+<!--    </div>-->
+
+
+
+</div>
+<div class='container d-lg-none mt-5'>
+    <div class='d-flex justify-content-center align-items-center'>
+        <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'" width='226' height='349' alt='Book'/>
+    </div>
+    <div class="mt-4">
+        <div class="ml-2 d-flex flex-column justify-content-center align-items-center">
+            <h2 th:text="${recipe.title}"></h2>
+            <pre class='lead' th:text="${recipe.ingredients}"></pre>
+            <pre class='lead' th:text="${recipe.steps}"></pre>
+<!--            <div class='m-3 d-flex justify-content-center align-items-center'>-->
+<!--                <a type='button' class='btn second-color btn-md text-white'-->
+<!--                   href="${window.location.origin}/reviews/${book.id}">-->
+<!--                    Reach all reviews-->
+<!--                </a>-->
+<!--            </div>-->
+
+        </div>
+
+<!--        <div class='m-3 d-flex justify-content-center align-items-center'>-->
+<!--            <a type='button' class='btn main-color btn-lg text-white'-->
+<!--               href="${window.location.origin}/checkout/book/${book.id}">-->
+<!--                CheckOut-->
+<!--            </a>-->
+
+<!--        </div>-->
+    </div>
+
+</div>
+</div>
+
+</div>
+
+<th:block th:include="~{fragments/nav-and-footer/footer}"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.example.myrecipebook.web;
 
 import com.example.myrecipebook.model.dto.AddRecipeDTO;
+import com.example.myrecipebook.model.dto.RecipeDTO;
 import com.example.myrecipebook.model.dto.SearchRecipeDTO;
 import com.example.myrecipebook.service.RecipeService;
 import jakarta.validation.Valid;
@@ -24,8 +25,13 @@ public class RecipeController {
     }
 
     @ModelAttribute
-    public AddRecipeDTO init() {
+    public AddRecipeDTO addRecipeDTO() {
         return new AddRecipeDTO();
+    }
+
+    @ModelAttribute
+    public RecipeDTO recipeDTO() {
+        return new RecipeDTO();
     }
 
     @GetMapping("/recipes/add")
@@ -56,9 +62,9 @@ public class RecipeController {
     public String searchByCategory(@PathVariable String category,
                                    @RequestParam(name = "page", defaultValue = "1") int page,
                                    @RequestParam(name = "size", defaultValue = "5") int size,
-                                   Model model) {
+                                   Model model, Principal principal) {
         Page<SearchRecipeDTO> recipeDTOPage = this.recipeService
-                .findByCategory(category, PageRequest.of(page -1, size));
+                .findByCategory(category, PageRequest.of(page -1, size), principal.getName());
                 prepareModelAttributes(recipeDTOPage, size, model);
 
         return "all-recipes";
@@ -69,9 +75,9 @@ public class RecipeController {
                                    @RequestParam(name = "page", defaultValue = "1") int page,
                                    @RequestParam(name = "size", defaultValue = "5") int size,
                                    @RequestParam(value = "title", required = false) String title,
-                                   Model model, RedirectAttributes redirectAttributes) {
+                                   Model model, RedirectAttributes redirectAttributes, Principal principal) {
         Page<SearchRecipeDTO> recipeDTOPage = this.recipeService
-                .findByTitleAndCategory(title, category, PageRequest.of(page -1, size));
+                .findByTitleAndCategory(title, category, PageRequest.of(page -1, size), principal.getName());
         prepareModelAttributes(recipeDTOPage, size, model);
 
         if (title != null) {
@@ -81,6 +87,16 @@ public class RecipeController {
 
 
         return "all-recipes";
+    }
+
+    @GetMapping("/recipes/details/{id}")
+    public String getRecipeById(@PathVariable Long id, Model model, Principal principal) {
+
+        RecipeDTO recipeDTO = this.recipeService.findById(id, principal.getName());
+
+        model.addAttribute("recipe", recipeDTO);
+
+        return "recipe-details";
     }
 
     private void prepareModelAttributes(Page<SearchRecipeDTO> recipeDTOPage, int size, Model model) {

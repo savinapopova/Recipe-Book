@@ -135,10 +135,10 @@
                         </div>
                     </div>
                     <div class='col-md-2 d-flex justify-content-center align-items-center'>
-                        <a class='btn btn-md btn-outline-dark mb-3 d-none d-lg-block' th:href="@{/recipes/{id}(id=*{recipe.getId()})}" >
+                        <a class='btn btn-md btn-outline-dark mb-3 d-none d-lg-block' th:href="@{/recipes/details/{id}(id=*{recipe.getId()})}" >
                             View Details
                         </a>
-                        <a class='btn btn-md btn-outline-dark mb-3 d-lg-none' th:href="@{/recipes/{id}(id=*{recipe.getId()})}" >
+                        <a class='btn btn-md btn-outline-dark mb-3 d-lg-none' th:href="@{/recipes/details/{id}(id=*{recipe.getId()})}" >
                             View Details
                         </a>
                     </div>
