@@ -128,4 +128,30 @@ public class RecipeServiceImpl implements RecipeService {
         recipeDTO.setSteps(steps);
         return recipeDTO;
     }
+
+    @Override
+    public void deleteRecipe(Long id, String username) {
+        User user = this.userService.findByUsername(username);
+        Recipe recipe = this.recipeRepository.findByUserAndId(user, id)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe not found!"));
+
+        this.recipeRepository.delete(recipe);
+    }
+
+    @Override
+    public void editRecipe(Long id, RecipeDTO recipeDTO, String username) {
+
+        User user = this.userService.findByUsername(username);
+        Recipe recipe = this.recipeRepository.findByUserAndId(user, id)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe not found!"));
+        categoryService.checkCategoryAvailable(recipeDTO.getCategoryName().name());
+
+        recipe.setTitle(recipeDTO.getTitle());
+        recipe.setImageUrl(recipeDTO.getImageUrl());
+        recipe.setCategory(this.categoryService.findByCategoryName(recipeDTO.getCategoryName().name()));
+        recipe.setIngredients(String.join(System.lineSeparator(), recipeDTO.getIngredients()));
+        recipe.setSteps(String.join(System.lineSeparator(), recipeDTO.getSteps()));
+
+        this.recipeRepository.save(recipe);
+    }
 }

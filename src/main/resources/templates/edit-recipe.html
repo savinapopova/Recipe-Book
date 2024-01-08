@@ -12,21 +12,21 @@
 
         <img class="card-img-top card-img-top-add" src="/images/my-family-recipes1.jpg">
 
-    <form th:action="@{/recipes/add}"
-          th:method="POST"
-          th:object="${addRecipeDTO}"
-          class="mt-4">
+        <form th:action="@{/recipes/edit/{id}(id = ${recipe.getId()})}"
+              th:method="PUT"
+              th:object="${recipe}"
+              class="mt-4">
 
-        <h2 class="text-center font-italic-title">Add Recipe</h2>
+            <h2 class="text-center font-italic-title">Edit Recipe</h2>
 
-        <div th:if="${sentSuccess}" class='alert alert-success font-italic-input' role='alert'>
-            Your recipe was added successfully
-        </div>
+            <div th:if="${sentSuccess}" class='alert alert-success font-italic-input' role='alert'>
+                Your recipe was added successfully
+            </div>
 
 
-        <div th:if="${#fields.hasErrors()}" class='alert alert-danger font-italic-input' role='alert'>
-            All fields must be filled out
-        </div>
+            <div th:if="${errors == true}" class='alert alert-danger font-italic-input' role='alert'>
+                All fields must be filled out
+            </div>
 
 
 
@@ -51,7 +51,7 @@
                     </div>
                     <div class='col-md-3 mb-3'>
                         <label class='form-label font-italic-input'>Category</label>
-                        <select th:field="*{category}"
+                        <select th:field="*{categoryName}"
                                 id='addNewBook' class='form-select font-italic-input' name="category">
                             <option value="" selected></option>
                             <option value="SOUP" class="font-italic-input">Soup</option>
@@ -74,15 +74,15 @@
 
                 <div class="d-flex justify-content-center">
 
-                <button type='submit' class='btn btn-lg btn-outline-dark mt-3 font-italic-input'>
-                    Submit
-                </button>
-            </div>
+                    <button type='submit' class='btn btn-lg btn-outline-dark mt-3 font-italic-input'>
+                        Submit Changes
+                    </button>
+                </div>
 
             </div>
 
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 
 <th:block th:include="~{fragments/nav-and-footer/footer}"/>

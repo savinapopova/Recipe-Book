@@ -99,6 +99,35 @@ public class RecipeController {
         return "recipe-details";
     }
 
+    @DeleteMapping("/recipes/delete/{id}")
+    public String deleteRecipe(@PathVariable Long id, Principal principal) {
+        this.recipeService.deleteRecipe(id, principal.getName());
+        return "redirect:/recipes/all";
+    }
+
+    @GetMapping("/recipes/edit/{id}")
+    public String editRecipe(@PathVariable Long id, Model model, Principal principal) {
+        RecipeDTO recipeDTO = this.recipeService.findById(id, principal.getName());
+        model.addAttribute("recipe", recipeDTO);
+        return "edit-recipe";
+    }
+
+    @PutMapping("/recipes/edit/{id}")
+    public String editRecipe(@PathVariable Long id, @Valid RecipeDTO recipeDTO, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes, Principal principal, Model model) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("recipe", recipeDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipe",
+                    bindingResult);
+            model.addAttribute("recipe", recipeDTO);
+            model.addAttribute("errors", true);
+            return "edit-recipe";
+        }
+        this.recipeService.editRecipe(id, recipeDTO, principal.getName());
+        redirectAttributes.addFlashAttribute("sentSuccess", true);
+        return "redirect:/recipes/details/" + id;
+    }
+
     private void prepareModelAttributes(Page<SearchRecipeDTO> recipeDTOPage, int size, Model model) {
         long totalElements = recipeDTOPage.getTotalElements();
 

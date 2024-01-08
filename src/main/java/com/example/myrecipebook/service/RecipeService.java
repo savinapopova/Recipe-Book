@@ -20,4 +20,8 @@ public interface RecipeService {
     Page<SearchRecipeDTO> findByTitle(String title, Pageable pageable, String username);
 
     RecipeDTO findById(Long id, String username);
+
+    void deleteRecipe(Long id, String username);
+
+    void editRecipe(Long id, RecipeDTO recipeDTO, String username);
 }

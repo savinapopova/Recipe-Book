@@ -25,6 +25,18 @@
                     </div>
 
                 </div>
+            <div class='m-3 d-flex justify-content-center align-items-center'>
+                <form th:action="@{/recipes/delete/{id}(id = ${recipe.getId()})}"
+                th:method="DELETE"
+                >
+                <button type='submit' class='btn btn-outline-dark btn-md'>
+                    Delete
+                </button>
+                </form>
+                <a type='submit' class='btn btn-outline-dark btn-md ms-2' th:href="@{/recipes/edit/{id}(id = ${recipe.getId()})}">
+                    Edit
+                </a>
+            </div>
 
     </div>
 
