@@ -39,6 +39,11 @@
     height: 500px; /* Можете да промените този размер според вашите нужди */
 }
 
+.card-img-top-details {
+    object-fit: cover; /* Запазва съотношението на страните и прави изображението изпълващо цялата област на картата */
+    height: 400px; /* Можете да промените този размер според вашите нужди */
+}
+
 
 
 .bg-image {
@@ -52,6 +57,15 @@
 
 .bg-image-add {
     background-image: url('/images/old-paper-sheet.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.bg-image-details{
+    background-image: url('/images/old-sheet.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
