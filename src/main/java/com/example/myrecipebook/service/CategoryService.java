@@ -6,4 +6,6 @@ public interface CategoryService {
     void seedCategories();
 
     Category findByCategoryName(String category);
+
+    void checkCategoryAvailable(String category);
 }

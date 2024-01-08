@@ -1,5 +1,6 @@
 package com.example.myrecipebook.repository;
 
+import com.example.myrecipebook.model.dto.SearchRecipeDTO;
 import com.example.myrecipebook.model.entity.Recipe;
 import com.example.myrecipebook.model.enums.CategoryName;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,8 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Page<Recipe> findByCategoryName(CategoryName categoryName, Pageable pageable);
+
+    Page<Recipe> findByTitleContaining(String title, Pageable pageable);
+
+    Page<Recipe> findAllByTitleContainingAndCategoryName(String title, CategoryName categoryName, Pageable pageable);
 }

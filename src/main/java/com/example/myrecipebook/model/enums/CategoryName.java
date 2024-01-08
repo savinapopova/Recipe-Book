@@ -4,8 +4,8 @@ public enum CategoryName {
 
     SOUP,
     SALAD,
-    MEAT_DISH,
-    FISH_DISH,
+    MEAT,
+    FISH,
     DESSERT,
     VEGETARIAN,
     BAKING,

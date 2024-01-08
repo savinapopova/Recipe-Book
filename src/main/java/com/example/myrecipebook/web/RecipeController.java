@@ -64,6 +64,25 @@ public class RecipeController {
         return "all-recipes";
     }
 
+    @PostMapping("/recipes/{category}")
+    public String searchByTitle(@PathVariable String category,
+                                   @RequestParam(name = "page", defaultValue = "1") int page,
+                                   @RequestParam(name = "size", defaultValue = "5") int size,
+                                   @RequestParam(value = "title", required = false) String title,
+                                   Model model, RedirectAttributes redirectAttributes) {
+        Page<SearchRecipeDTO> recipeDTOPage = this.recipeService
+                .findByTitleAndCategory(title, category, PageRequest.of(page -1, size));
+        prepareModelAttributes(recipeDTOPage, size, model);
+
+        if (title != null) {
+            model.addAttribute("title", title);
+            redirectAttributes.addFlashAttribute("title", title);
+        }
+
+
+        return "all-recipes";
+    }
+
     private void prepareModelAttributes(Page<SearchRecipeDTO> recipeDTOPage, int size, Model model) {
         long totalElements = recipeDTOPage.getTotalElements();
 

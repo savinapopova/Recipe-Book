@@ -13,4 +13,8 @@ public interface RecipeService {
     Page<SearchRecipeDTO> findByCategory(String categoryName, Pageable pageable);
 
     Page<SearchRecipeDTO> getSearchedRecipes(Pageable pageable);
+
+    Page<SearchRecipeDTO> findByTitleAndCategory(String title, String category, Pageable pageable);
+
+    Page<SearchRecipeDTO> findByTitle(String title, Pageable pageable);
 }

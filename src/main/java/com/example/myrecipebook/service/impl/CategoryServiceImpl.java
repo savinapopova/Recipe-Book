@@ -38,4 +38,15 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.findByName(CategoryName.valueOf(category.toUpperCase()))
                 .orElseThrow(() -> new ObjectNotFoundException("Category with name " + category.toLowerCase() + " not found!"));
     }
+
+    @Override
+    public void checkCategoryAvailable(String category) {
+        List<String> categories = Arrays.stream(CategoryName.values())
+                .map(Enum::name).collect(Collectors.toList());
+
+
+    if (!categories.contains(category.toUpperCase())) {
+            throw new ObjectNotFoundException("Category with name " + category.toLowerCase() + " not found!");
+        }
+    }
 }

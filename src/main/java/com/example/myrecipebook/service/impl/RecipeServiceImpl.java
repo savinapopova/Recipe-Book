@@ -52,6 +52,8 @@ public class RecipeServiceImpl implements RecipeService {
 
         }
 
+        categoryService.checkCategoryAvailable(category);
+
         return this.recipeRepository.findByCategoryName(CategoryName.valueOf(category.toUpperCase()), pageable)
                 .map(recipe -> modelMapper.map(recipe, SearchRecipeDTO.class));
     }
@@ -59,6 +61,37 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Page<SearchRecipeDTO> getSearchedRecipes(Pageable pageable) {
         return this.recipeRepository.findAll(pageable)
+                .map(recipe -> modelMapper.map(recipe, SearchRecipeDTO.class));
+    }
+
+    @Override
+    public Page<SearchRecipeDTO> findByTitleAndCategory(String title, String category, Pageable pageable) {
+        if ((category ==null || category.toLowerCase().equals("all") ||category.trim().isBlank())
+        && (title == null || title.trim().isBlank())) {
+            return getSearchedRecipes(pageable);
+        }
+
+        if (category == null || category.toLowerCase().equals("all") || category.trim().isBlank()) {
+            return findByTitle(title, pageable);
+        }
+
+
+        if (title == null || title.trim().isBlank()) {
+            return findByCategory(category, pageable);
+        }
+
+        return this.recipeRepository.findAllByTitleContainingAndCategoryName(title, CategoryName.valueOf(category.toUpperCase()), pageable)
+                .map(recipe -> modelMapper.map(recipe, SearchRecipeDTO.class));
+    }
+
+    @Override
+    public Page<SearchRecipeDTO> findByTitle(String title, Pageable pageable) {
+
+        if (title == null || title.trim().isBlank()) {
+            return getSearchedRecipes(pageable);
+        }
+
+        return this.recipeRepository.findByTitleContaining(title, pageable)
                 .map(recipe -> modelMapper.map(recipe, SearchRecipeDTO.class));
     }
 }
