@@ -9,5 +9,6 @@ public enum CategoryName {
     DESSERT,
     VEGETARIAN,
     BAKING,
+    BEVERAGE,
     OTHER
 }

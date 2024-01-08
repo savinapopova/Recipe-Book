@@ -6,33 +6,93 @@
 <header th:include="~{fragments/nav-and-footer/nav}"/>
 <div class="container-fluid">
   <div class="row mt-5 mb-5">
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card">
-        <img src="/images/main-dishes.jpg" class="card-img-top card-img-top-home" alt="recipe1">
-        <div class="card-body">
-          <h5 class="card-title">Main Dishes</h5>
-          <p class="card-text">Delicious recipes for hearty main dishes. Explore a variety of flavors and cuisines to satisfy your appetite.</p>
-          <a href="#" class="btn btn-dark text-light">View Recipes</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
       <div class="card">
         <img src="/images/desserts.jpg" class="card-img-top card-img-top-home" alt="recipe2">
         <div class="card-body">
           <h5 class="card-title">Desserts</h5>
-          <p class="card-text">Indulge your sweet tooth with our delectable dessert recipes. From cakes to cookies, satisfy your dessert cravings.</p>
-          <a href="#" class="btn btn-dark text-light">View Recipes</a>
+          <p class="card-text card-description">Indulge your sweet tooth with our delectable dessert recipes. From cakes to cookies, satisfy your dessert cravings.</p>
+          <a th:href="@{/recipes/dessert}" class="btn btn-dark text-light">View Recipes</a>
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
       <div class="card">
         <img src="/images/baking.jpg" class="card-img-top card-img-top-home" alt="recipe3">
         <div class="card-body">
           <h5 class="card-title">Baking</h5>
-          <p class="card-text">Discover the art of baking with our collection of baking recipes. From bread to pastries, elevate your baking skills.</p>
-          <a href="#" class="btn btn-dark text-light">View Recipes</a>
+          <p class="card-text card-description">Discover the art of baking with our collection of baking recipes. From bread to pastries, elevate your baking skills.</p>
+          <a th:href="@{/recipes/baking}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/beverages.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Beverages</h5>
+          <p class="card-text card-description">Explore refreshing beverage recipes to quench your thirst. From smoothies to cocktails, find the perfect drink for any occasion.</p>
+          <a th:href="@{/recipes/beverage}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/main-dishes.jpg" class="card-img-top card-img-top-home" alt="recipe3">
+        <div class="card-body">
+          <h5 class="card-title">Meat Dishes</h5>
+          <p class="card-text card-description">Savor the rich flavors of our meaty recipes. From hearty stews to succulent roasts, discover a variety of meat-based dishes.</p>
+          <a th:href="@{/recipes/meat}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/fish.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Fish Dishes</h5>
+          <p class="card-text card-description">Dive into our collection of delicious fish recipes. From grilled seafood to flavorful fish curries, find the perfect dish for fish lovers.</p>
+          <a th:href="@{/recipes/fish}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/vegie.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Vegetarian Dishes</h5>
+          <p class="card-text card-description">Explore the world of vegetarian cuisine with our diverse collection of plant-based recipes. From hearty salads to savory meat alternatives, discover delicious vegetarian options.</p>
+          <a th:href="@{/recipes/vegetarian}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/salad.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Salads</h5>
+          <p class="card-text card-description">Refresh your palate with our vibrant salad recipes. From fresh greens to hearty grain salads, find the perfect salad to complement any meal.</p>
+          <a th:href="@{/recipes/salad}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/soup.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Soups</h5>
+          <p class="card-text card-description">Warm up with our comforting soup recipes. From hearty stews to creamy bisques, find the perfect soup to satisfy your cravings.</p>
+          <a th:href="@{/recipes/soup}" class="btn btn-dark text-light">View Recipes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="/images/other.jpg" class="card-img-top card-img-top-home" alt="recipe1">
+        <div class="card-body">
+          <h5 class="card-title">Other</h5>
+          <p class="card-text card-description">Explore a variety of unique recipes that don't fit into traditional categories. From experimental dishes to culinary surprises, discover something new and exciting.</p>
+          <a th:href="@{/recipes/other}" class="btn btn-dark text-light">View Recipes</a>
         </div>
       </div>
     </div>

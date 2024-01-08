@@ -81,6 +81,12 @@
                             </li>
                             <li>
                                 <a class='dropdown-item'
+                                   th:href="@{/recipes/beverage}">
+                                    Beverage
+                                </a>
+                            </li>
+                            <li>
+                                <a class='dropdown-item'
                                    th:href="@{/recipes/other}">
                                     Other
                                 </a>
@@ -99,14 +105,15 @@
                     <th:block th:text="${lastItem}"/> of <th:block th:text="${totalElements}"/> items:
                 </p>
             </div>
-            <div th:each="recipe: ${recipes}" class='card mt-3 shadow mb-3 bg-body rounded'>
+            <div th:each="recipe: ${recipes}" class='card mt-3 shadow mb-3 bg-body rounded d-flex flex-column h-100'>
                 <div class='row g-0'>
                     <div class='col-md-2'>
-                        <div class='d-none d-lg-block'>
+                        <div class='d-none d-lg-block ratio ratio-4x3'>
 
                             <img th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'"
                                  class="img-fluid h-100"
                                  alt='Recipe'
+                                 style="object-fit: cover";
                             />
                         </div>
                         <div class='d-lg-none d-flex justify-content-center
@@ -154,8 +161,8 @@
                     <li class="page-item" th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
                         <form th:action="@{/recipes/{category}(category=${category}, page=${pageNumber}, title=${title})}"
                               th:method="POST">
-                            <button type="submit" class="page-link text-main-color" th:text="${pageNumber}"
-                                    th:classappend="${pageNumber == currentPage} ? 'active second-color text-white' : ''"></button>
+                            <button type="submit" class="page-link text-dark" th:text="${pageNumber}"
+                                    th:classappend="${pageNumber == currentPage} ? 'second-color text-white' : ''"></button>
                         </form>
                     </li>
 
