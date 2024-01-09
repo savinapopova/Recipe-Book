@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "roles")
-@Data
 public class Role {
 
     @Id
@@ -22,5 +21,23 @@ public class Role {
 
     public Role(RoleName name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Role setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public RoleName getName() {
+        return name;
+    }
+
+    public Role setName(RoleName name) {
+        this.name = name;
+        return this;
     }
 }

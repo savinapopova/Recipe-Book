@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "categories")
-@Data
 public class Category {
 
     @Id
@@ -22,5 +21,23 @@ public class Category {
 
     public Category(CategoryName name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Category setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public CategoryName getName() {
+        return name;
+    }
+
+    public Category setName(CategoryName name) {
+        this.name = name;
+        return this;
     }
 }

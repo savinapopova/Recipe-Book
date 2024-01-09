@@ -7,7 +7,6 @@ import java.util.*;
 
 @Entity
 @Table(name = "recipes")
-@Data
 public class Recipe {
 
     @Id
@@ -46,5 +45,68 @@ public class Recipe {
         this.steps = steps;
         this.imageUrl = imageUrl;
         this.category = category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Recipe setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Recipe setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public Recipe setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+        return this;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public Recipe setSteps(String steps) {
+        this.steps = steps;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public Recipe setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Recipe setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Recipe setUser(User user) {
+        this.user = user;
+        return this;
     }
 }
