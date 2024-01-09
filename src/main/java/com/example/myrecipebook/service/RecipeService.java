@@ -1,6 +1,7 @@
 package com.example.myrecipebook.service;
 
 import com.example.myrecipebook.model.dto.AddRecipeDTO;
+import com.example.myrecipebook.model.dto.EditRecipeDTO;
 import com.example.myrecipebook.model.dto.RecipeDTO;
 import com.example.myrecipebook.model.dto.SearchRecipeDTO;
 import org.springframework.data.domain.Page;
@@ -23,5 +24,7 @@ public interface RecipeService {
 
     void deleteRecipe(Long id, String username);
 
-    void editRecipe(Long id, RecipeDTO recipeDTO, String username);
+    void editRecipe(Long id, EditRecipeDTO recipeDTO, String username);
+
+    EditRecipeDTO findRecipeToEdit(Long id, String username);
 }

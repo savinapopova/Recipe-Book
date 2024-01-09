@@ -2,6 +2,7 @@ package com.example.myrecipebook.service.impl;
 
 import com.example.myrecipebook.exception.ObjectNotFoundException;
 import com.example.myrecipebook.model.dto.AddRecipeDTO;
+import com.example.myrecipebook.model.dto.EditRecipeDTO;
 import com.example.myrecipebook.model.dto.RecipeDTO;
 import com.example.myrecipebook.model.dto.SearchRecipeDTO;
 import com.example.myrecipebook.model.entity.Category;
@@ -139,7 +140,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void editRecipe(Long id, RecipeDTO recipeDTO, String username) {
+    public void editRecipe(Long id, EditRecipeDTO recipeDTO, String username) {
 
         User user = this.userService.findByUsername(username);
         Recipe recipe = this.recipeRepository.findByUserAndId(user, id)
@@ -149,9 +150,22 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setTitle(recipeDTO.getTitle());
         recipe.setImageUrl(recipeDTO.getImageUrl());
         recipe.setCategory(this.categoryService.findByCategoryName(recipeDTO.getCategoryName().name()));
-        recipe.setIngredients(String.join(System.lineSeparator(), recipeDTO.getIngredients()));
-        recipe.setSteps(String.join(System.lineSeparator(), recipeDTO.getSteps()));
+        recipe.setIngredients(recipeDTO.getIngredients());
+        recipe.setSteps(recipeDTO.getSteps());
 
         this.recipeRepository.save(recipe);
+    }
+
+    @Override
+    public EditRecipeDTO findRecipeToEdit(Long id, String username) {
+
+        User user = this.userService.findByUsername(username);
+        Recipe recipe = this.recipeRepository.findByUserAndId(user, id)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe not found!"));
+
+        EditRecipeDTO editRecipeDTO = modelMapper.map(recipe, EditRecipeDTO.class);
+
+
+        return editRecipeDTO;
     }
 }

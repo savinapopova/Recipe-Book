@@ -5,27 +5,27 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class RecipeDTO {
+public class EditRecipeDTO {
 
+    @NotNull
     private Long id;
 
-
+    @NotBlank
     private String title;
 
+    @NotBlank
     private String imageUrl;
 
-
+    @NotNull
     private CategoryName categoryName;
 
+    @NotBlank
+    private String ingredients;
 
-    private List<String> ingredients;
+    @NotBlank
+    private String steps;
 
-
-    private List<String> steps;
-
-    public RecipeDTO() {
+    public EditRecipeDTO() {
     }
 }

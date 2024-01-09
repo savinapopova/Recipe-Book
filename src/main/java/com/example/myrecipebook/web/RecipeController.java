@@ -1,6 +1,7 @@
 package com.example.myrecipebook.web;
 
 import com.example.myrecipebook.model.dto.AddRecipeDTO;
+import com.example.myrecipebook.model.dto.EditRecipeDTO;
 import com.example.myrecipebook.model.dto.RecipeDTO;
 import com.example.myrecipebook.model.dto.SearchRecipeDTO;
 import com.example.myrecipebook.service.RecipeService;
@@ -107,13 +108,13 @@ public class RecipeController {
 
     @GetMapping("/recipes/edit/{id}")
     public String editRecipe(@PathVariable Long id, Model model, Principal principal) {
-        RecipeDTO recipeDTO = this.recipeService.findById(id, principal.getName());
+        EditRecipeDTO recipeDTO = this.recipeService.findRecipeToEdit(id, principal.getName());
         model.addAttribute("recipe", recipeDTO);
         return "edit-recipe";
     }
 
     @PutMapping("/recipes/edit/{id}")
-    public String editRecipe(@PathVariable Long id, @Valid RecipeDTO recipeDTO, BindingResult bindingResult,
+    public String editRecipe(@PathVariable Long id, @Valid EditRecipeDTO recipeDTO, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipe", recipeDTO);
