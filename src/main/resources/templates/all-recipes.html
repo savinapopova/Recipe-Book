@@ -155,7 +155,7 @@
                     <li class="page-item" th:if="${currentPage > 1}">
                         <form th:action="@{/recipes/{category}(category=${category}, page=${currentPage - 1}, title=${title})}"
                               th:method="POST">
-                            <button type="submit" class="page-link text-main-color">Previous</button>
+                            <button type="submit" class="page-link text-dark">Previous</button>
                         </form>
                     </li>
                     <li class="page-item" th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
@@ -170,7 +170,7 @@
                         <form th:action="@{/recipes/{category}(category=${category}, page=${currentPage + 1}, title=${title})}"
                               th:method="POST">
 
-                            <button type="submit" class="page-link text-main-color">Next</button>
+                            <button type="submit" class="page-link text-dark">Next</button>
                         </form>
                     </li>
                 </ul>
