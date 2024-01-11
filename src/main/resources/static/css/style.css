@@ -21,6 +21,11 @@
     font-size: 24px;
 }
 
+.font-italic-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+}
+
 /* Стилове за тъмен тогълер */
 .custom-dark-toggler {
     color: #000; /* Цвят на иконата и текста */

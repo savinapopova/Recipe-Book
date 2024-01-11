@@ -4,25 +4,26 @@
 <th:block th:include="~{fragments/head.html}"/>
 <body class="d-flex flex-column min-vh-100 bg-image-add">
 <header th:include="~{fragments/nav-and-footer/nav}"/>
-<div class="d-flex flex-column align-items-center">
-    <div class="container">
-    <div class=" d-flex flex-column align-items-center">
-        <div class="card m-4 shadow bg-body rounded col-md-9">
+  <div class="d-flex flex-column align-items-center">
+    <div class="container d-none d-lg-block">
+       <div class=" d-flex flex-column align-items-center">
+         <div class="card m-4 shadow bg-body rounded col-md-9">
             <img class="card-img-top-details rounded"
                             th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'" alt="Book">
 
 
                 <div class="card-body d-flex flex-column align-items-center mt-4">
-                    <h2 class="card-title fst-italic"
+                    <h2 class="card-title font-italic-title"
                             th:text="${recipe.title}"></h2>
-                    <div class="mt-5 col-md-10 d-flex flex-column align-items-center">
-                        <h5 class="text-center font-italic-input">Ingredients</h5>
+                       <div class="mt-4 col-md-10 d-flex flex-column align-items-center">
+                        <h5 class="text-center font-italic-subtitle mb-3">Ingredients</h5>
                         <p th:each="i: ${recipe.getIngredients()}" th:text="${i}"></p>
-                    </div>
-                    <div class="mt-3 col-md-10 d-flex flex-column align-items-center">
-                        <h5 class="text-center font-italic-input">Steps</h5>
-                        <p th:each="s: ${recipe.getSteps()}" th:text="${s}"></p>
-                    </div>
+                        </div>
+                       <div class="mt-3 col-md-10">
+                        <h5 class="text-center font-italic-subtitle mb-3" >Steps</h5>
+                        <p th:each="s: ${recipe.getSteps()}" th:text="${s}"
+                        class="mb-1"></p>
+                       </div>
 
                 </div>
             <div class='m-3 d-flex justify-content-center align-items-center'>
@@ -38,13 +39,48 @@
                 </a>
             </div>
 
-    </div>
+          </div>
 
+        </div>
     </div>
-    </div>
+  </div>
 
-</div>
 
+    <div class='container-fluid d-lg-none bg-white'>
+        <div class='d-flex justify-content-center align-items-center card'>
+            <img class="rounded card-img-top"
+             th:src="${!recipe.imageUrl.isBlank()} ? ${recipe.imageUrl} : '/images/my-family-recipes2.jpg'" alt="Recipe">
+        </div>
+       <div class="mt-4">
+         <div class="ml-2 d-flex flex-column justify-content-center align-items-center">
+            <h2 class="card-title font-italic-title text-center"
+            th:text="${recipe.title}"></h2>
+            <div class="mt-4 d-flex flex-column align-items-center">
+                <h5 class="text-center font-italic-subtitle mb-3">Ingredients</h5>
+                <p th:each="i: ${recipe.getIngredients()}" th:text="${i}"></p>
+            </div>
+            <div class="mt-3">
+                <h5 class="text-center font-italic-subtitle mb-3" >Steps</h5>
+                <p th:each="s: ${recipe.getSteps()}" th:text="${s}"
+                   class="mb-1"></p>
+            </div>
+            <div class='m-3 d-flex justify-content-center align-items-center'>
+                <form th:action="@{/recipes/delete/{id}(id = ${recipe.getId()})}"
+                      th:method="DELETE"
+                >
+                    <button type='submit' class='btn btn-outline-dark btn-md'>
+                        Delete
+                    </button>
+                </form>
+                <a type='submit' class='btn btn-outline-dark btn-md ms-2' th:href="@{/recipes/edit/{id}(id = ${recipe.getId()})}">
+                    Edit
+                </a>
+            </div>
+
+         </div>
+
+        </div>
+     </div>
 
 
 <th:block th:include="~{fragments/nav-and-footer/footer}"/>
