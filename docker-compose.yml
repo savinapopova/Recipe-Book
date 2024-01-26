@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  recipebook:
+    image: savinabg/recipebook
+    container_name: recipebook
+    networks:
+      - my_network
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+        - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/recipebookdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=my-secret-pw
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=my-secret-pw
+        - MYSQL_DATABASE=recipebookdb
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=password
+    ports:
+        - "3307:3306"
+    volumes:
+        - mysql-data:/var/lib/mysql
+    networks:
+        - my_network
+
+networks:
+    my_network:
+
+volumes:
+    mysql-data:
