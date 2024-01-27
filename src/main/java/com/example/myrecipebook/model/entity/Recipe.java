@@ -24,7 +24,7 @@ public class Recipe {
     private String steps;
 
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
    @ManyToOne

@@ -14,7 +14,7 @@ public class EditRecipeDTO {
     @NotBlank
     private String title;
 
-    @NotBlank
+
     private String imageUrl;
 
     @NotNull
