@@ -13,6 +13,7 @@ import com.example.myrecipebook.repository.RecipeRepository;
 import com.example.myrecipebook.service.CategoryService;
 import com.example.myrecipebook.service.RecipeService;
 import com.example.myrecipebook.service.UserService;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,23 +33,35 @@ public class RecipeServiceImpl implements RecipeService {
 
     private ModelMapper modelMapper;
 
+    private UrlValidator urlValidator;
+
     public RecipeServiceImpl(RecipeRepository recipeRepository, CategoryService categoryService,
-                             UserService userService, ModelMapper modelMapper) {
+                             UserService userService, ModelMapper modelMapper, UrlValidator urlValidator) {
         this.recipeRepository = recipeRepository;
         this.categoryService = categoryService;
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.urlValidator = urlValidator;
     }
 
     @Override
     public void addRecipe(AddRecipeDTO addRecipeDTO , String username) {
         Category category = this.categoryService.findByCategoryName(addRecipeDTO.getCategory());
         User user = this.userService.findByUsername(username);
+        String imageUrl = addRecipeDTO.getImageUrl();
+        imageUrl = getImageUrl(imageUrl);
 
         Recipe recipe = new Recipe(addRecipeDTO.getTitle(), addRecipeDTO.getIngredients(), addRecipeDTO.getSteps(),
-                addRecipeDTO.getImageUrl(), category);
+                imageUrl, category);
         recipe.setUser(user);
         this.recipeRepository.save(recipe);
+    }
+
+    private String getImageUrl(String imageUrl) {
+        if (imageUrl != null && !this.urlValidator.isValid(imageUrl)) {
+            imageUrl = "";
+        }
+        return imageUrl;
     }
 
     @Override
@@ -148,7 +161,11 @@ public class RecipeServiceImpl implements RecipeService {
         categoryService.checkCategoryAvailable(recipeDTO.getCategoryName().name());
 
         recipe.setTitle(recipeDTO.getTitle());
-        recipe.setImageUrl(recipeDTO.getImageUrl());
+
+        String imageUrl = recipeDTO.getImageUrl();
+        imageUrl = getImageUrl(imageUrl);
+
+        recipe.setImageUrl(imageUrl);
         recipe.setCategory(this.categoryService.findByCategoryName(recipeDTO.getCategoryName().name()));
         recipe.setIngredients(recipeDTO.getIngredients());
         recipe.setSteps(recipeDTO.getSteps());
